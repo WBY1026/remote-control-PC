@@ -3,6 +3,8 @@ import type { Configuration } from 'webpack';
 import { rules } from './webpack.rules';
 import { plugins } from './webpack.plugins';
 
+const path = require('path')
+
 export const mainConfig: Configuration = {
   /**
    * This is the main entry point for your application, it's the first file
@@ -16,5 +18,8 @@ export const mainConfig: Configuration = {
   plugins,
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
+    alias: {
+      '@': path.resolve(__dirname, 'src/')
+    },
   },
 };
