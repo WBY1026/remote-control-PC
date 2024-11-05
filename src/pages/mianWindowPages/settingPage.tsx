@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 
-function MainWindowPage() {
+function SettingPage() {
     const navigate = useNavigate()
-
     return (
-        <div>主窗口入口</div>
+        <div>
+            设置页
+        </div>
     )
 }
 
-export default MainWindowPage;
-
+export default SettingPage
