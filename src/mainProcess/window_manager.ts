@@ -2,7 +2,7 @@
 
 const winDict:WindowDict = {};
 
-import { WindowDict, EWindow } from "@/mainProcess/window_mamager.types";
+import { WindowDict, EWindow } from "@/mainProcess/window_manager.types";
 
 const WindowDictProxy = new Proxy(winDict, {
   // 当访问 WindowDictProxy 中的属性时，触发该方法。

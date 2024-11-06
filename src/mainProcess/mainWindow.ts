@@ -9,6 +9,7 @@ const createMainWindow = (): void => {
 
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    frame: false,
     height: 600,
     width: 800,
     webPreferences: {
@@ -16,16 +17,12 @@ const createMainWindow = (): void => {
     },
   });
 
-  // 窗口好后将窗口登记到Window_Manager上
-  mainWindow.on('ready-to-show', () => {
-    Window_Manager.setWindowById(mainWindow)
-  })
-
   mainWindow.webContents.on('did-finish-load',()=>{
     mainWindow.webContents.send('window-id', mainWindow.id);
   })
 
-  mainWindow.on('ready-to-show',()=>{
+  // 窗口好后将窗口登记到Window_Manager上
+  mainWindow.on('ready-to-show', () => {
     Window_Manager.setWindowById(mainWindow)
   })
 

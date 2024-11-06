@@ -1,0 +1,6 @@
+.dragZone {
+    width: 100%;
+    height: 20px;
+    background-color: antiquewhite;
+    -webkit-app-region: drag;
+}
