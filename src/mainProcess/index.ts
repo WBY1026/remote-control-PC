@@ -1,13 +1,21 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 
-import Window_Manager from '@/mainProcess/window_manager';
+// 创建主窗口方法
 import createMainWindow from '@/mainProcess/mainWindow';
+// 窗口管理器监听
+import { setUpWindowManagerHandlers } from '@/mainProcess/windowManager'
+// webRTC监听
+import { setUpWebRTCHandlers } from '@/mainProcess/webRTC';
 
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
-app.on('ready', createMainWindow);
+app.on('ready', ()=>{
+  setUpWindowManagerHandlers()
+  setUpWebRTCHandlers()
+  createMainWindow()
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -23,27 +31,3 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on("ipc-window-manager-by-id", (event, id, action) => {
-  switch (action) {
-    case "hide":
-      Window_Manager.hideWindowById(id);
-      break;
-    case "show":
-      Window_Manager.showWindowById(id);
-      break;
-    case "maximize":
-      Window_Manager.maximizeWindowById(id);
-      break;
-    case "minimize":
-      Window_Manager.minimizeWindowById(id);
-      break;
-    case "restore":
-      Window_Manager.restoreWindowById(id);
-      break;
-     // 从渲染进程关闭最终在主进程实现关闭
-    case "close":     
-      // 调用该方法，能够删除进程池中的记录
-      Window_Manager.closeWindowById(id);
-      break;
-  }
-});

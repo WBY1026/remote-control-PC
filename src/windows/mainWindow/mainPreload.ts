@@ -7,6 +7,10 @@ contextBridge.exposeInMainWorld('windowControl', {
     getSelfWindowId: () => window_id
 })
 
+contextBridge.exposeInMainWorld('screenInfo', {
+    getScreenData: () => ipcRenderer.invoke('get-screen-data')
+})
+
 let window_id: string
 ipcRenderer.on('window-id', (event, windowId) => {
     window_id = windowId
