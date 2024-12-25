@@ -1,7 +1,7 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow } from 'electron';
 
 // 创建主窗口方法
-import createMainWindow from '@/mainProcess/mainWindow';
+import createBasicWindow from '@/mainProcess/windowCreater/basicWindow';
 // 窗口管理器监听
 import { setUpWindowManagerHandlers } from '@/mainProcess/windowManager'
 // webRTC监听
@@ -14,7 +14,7 @@ if (require('electron-squirrel-startup')) {
 app.on('ready', ()=>{
   setUpWindowManagerHandlers()
   setUpWebRTCHandlers()
-  createMainWindow()
+  createBasicWindow('/main_window')
 });
 
 app.on('window-all-closed', () => {
@@ -27,7 +27,7 @@ app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) {
-    createMainWindow();
+    createBasicWindow('/main_window');
   }
 });
 

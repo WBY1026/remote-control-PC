@@ -32,6 +32,14 @@ const config: ForgeConfig = {
               js: './src/windows/mainWindow/mainPreload.ts',
             },
           },
+          {
+            html: './src/windows/basicWindow/basicWindow.html',
+            js: './src/windows/basicWindow/basicRenderer.ts',
+            name: 'basic_window',
+            preload: {
+              js: './src/windows/basicWindow/basicPreload.ts',
+            },
+          },
         ],
       },
     }),
